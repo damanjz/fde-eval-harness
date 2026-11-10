@@ -1,0 +1,19 @@
+[project]
+name = "fde-eval-harness"
+version = "0.1.0"
+requires-python = ">=3.13"
+
+[tool.ruff]
+line-length = 110
+target-version = "py313"
+extend-exclude = ["tests/fixtures"]  # frozen copies of project 1 files: never reformatted
+
+[tool.ruff.lint]
+select = ["E4", "E7", "E9", "F", "I", "B", "UP", "SIM"]  # line length is the formatter's job, as in the other projects
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = [
+  "p1: needs the support-agent repo and its Postgres (skipped otherwise)",
+  "p4: needs the ask-your-data repo (skipped otherwise)",
+]

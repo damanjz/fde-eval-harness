@@ -1,0 +1,1290 @@
+{
+ "format": "fde-harness-run/1",
+ "run": {
+  "run_id": "support_agent-p1-run4-no-retrieval",
+  "suite": "support_agent",
+  "model": "fusion27b:iq3",
+  "status": "complete",
+  "label": "support_agent-p1-run4-no-retrieval",
+  "started_at": "2026-11-10T02:26:54",
+  "finished_at": "2026-11-10T02:34:04",
+  "git_hash": null,
+  "prompt_hash": null,
+  "code_hash": null,
+  "case_set_hash": "5e48b965e0c0",
+  "n_cases": 60,
+  "config": {
+   "source": "project 1 evals/results/20261110-015524-no_retrieval.jsonl",
+   "variant": "no_retrieval",
+   "imported": true,
+   "judge": null,
+   "limit": null,
+   "ids": null,
+   "n_cases_total": 60,
+   "scorer_hash": "56ade287dfab",
+   "clock_now": null,
+   "note": "Imported from recorded results. Project 1 did not store the model name, the case file, the scoring code or the clock per run: the model is as named at import, case_set_hash and scorer_hash are those of the current cases.jsonl and scoring.py, and the runs used the wall clock."
+  },
+  "notes": null
+ },
+ "results": [
+  {
+   "case_id": "A01",
+   "category": "answer",
+   "passed": false,
+   "status": "ok",
+   "checks": {
+    "facts": false,
+    "citations": false
+   },
+   "reasons": [
+    "missing fact '3 to 6 business days'",
+    "missing citation KB-001"
+   ],
+   "latency_ms": 3177.0,
+   "prompt_tokens": 2099,
+   "completion_tokens": 31,
+   "cost_inr": 0.0,
+   "attempts": 1,
+   "output": null,
+   "error": null,
+   "ts": "2026-11-10T02:26:54"
+  },
+  {
+   "case_id": "A02",
+   "category": "answer",
+   "passed": false,
+   "status": "ok",
+   "checks": {
+    "facts": false,
+    "citations": false
+   },
+   "reasons": [
+    "missing fact 'INR 79'",
+    "missing citation KB-001"
+   ],
+   "latency_ms": 3569.0,
+   "prompt_tokens": 2108,
+   "completion_tokens": 44,
+   "cost_inr": 0.0,
+   "attempts": 1,
+   "output": null,
+   "error": null,
+   "ts": "2026-11-10T02:27:01"
+  },
+  {
+   "case_id": "A03",
+   "category": "answer",
+   "passed": false,
+   "status": "ok",
+   "checks": {
+    "facts": false,
+    "citations": false
+   },
+   "reasons": [
+    "missing fact 'INR 149'",
+    "missing fact '1 to 2'",
+    "missing citation KB-001"
+   ],
+   "latency_ms": 3235.0,
+   "prompt_tokens": 2101,
+   "completion_tokens": 24,
+   "cost_inr": 0.0,
+   "attempts": 1,
+   "output": null,
+   "error": null,
+   "ts": "2026-11-10T02:27:07"
+  },
+  {
+   "case_id": "A04",
+   "category": "answer",
+   "passed": false,
+   "status": "ok",
+   "checks": {
+    "facts": false,
+    "citations": false
+   },
+   "reasons": [
+    "missing fact 'pincode'",
+    "missing citation KB-001"
+   ],
+   "latency_ms": 3055.0,
+   "prompt_tokens": 2104,
+   "completion_tokens": 22,
+   "cost_inr": 0.0,
+   "attempts": 1,
+   "output": null,
+   "error": null,
+   "ts": "2026-11-10T02:27:14"
+  },
+  {
+   "case_id": "A05",
+   "category": "answer",
+   "passed": false,
+   "status": "ok",
+   "checks": {
+    "facts": false,
+    "citations": false
+   },
+   "reasons": [
+    "missing fact '24 hours'",
+    "missing citation KB-002"
+   ],
+   "latency_ms": 3512.0,
+   "prompt_tokens": 2103,
+   "completion_tokens": 41,
+   "cost_inr": 0.0,
+   "attempts": 1,
+   "output": null,
+   "error": null,
+   "ts": "2026-11-10T02:27:21"
+  },
+  {
+   "case_id": "A06",
+   "category": "answer",
+   "passed": false,
+   "status": "ok",
+   "checks": {
+    "facts": false,
+    "citations": false
+   },
+   "reasons": [
+    "missing fact 'outside India'",
+    "missing citation KB-004"
+   ],
+   "latency_ms": 7976.0,
+   "prompt_tokens": 4766,
+   "completion_tokens": 119,
+   "cost_inr": 0.0,
+   "attempts": 1,
+   "output": null,
+   "error": null,
+   "ts": "2026-11-10T02:27:32"
+  },
+  {
+   "case_id": "A07",
+   "category": "answer",
+   "passed": false,
+   "status": "ok",
+   "checks": {
+    "facts": false,
+    "citations": false
+   },
+   "reasons": [
+    "missing fact '5,000'",
+    "missing fact 'INR 40'",
+    "missing citation KB-005"
+   ],
+   "latency_ms": 3377.0,
+   "prompt_tokens": 2106,
+   "completion_tokens": 33,
+   "cost_inr": 0.0,
+   "attempts": 1,
+   "output": null,
+   "error": null,
+   "ts": "2026-11-10T02:27:39"
+  },
+  {
+   "case_id": "A08",
+   "category": "answer",
+   "passed": false,
+   "status": "ok",
+   "checks": {
+    "facts": false,
+    "citations": false
+   },
+   "reasons": [
+    "missing fact 'cannot'",
+    "missing citation KB-006"
+   ],
+   "latency_ms": 4613.0,
+   "prompt_tokens": 2110,
+   "completion_tokens": 85,
+   "cost_inr": 0.0,
+   "attempts": 1,
+   "output": null,
+   "error": null,
+   "ts": "2026-11-10T02:27:47"
+  },
+  {
+   "case_id": "A09",
+   "category": "answer",
+   "passed": false,
+   "status": "ok",
+   "checks": {
+    "facts": true,
+    "citations": false
+   },
+   "reasons": [
+    "missing citation KB-007"
+   ],
+   "latency_ms": 3006.0,
+   "prompt_tokens": 2103,
+   "completion_tokens": 20,
+   "cost_inr": 0.0,
+   "attempts": 1,
+   "output": null,
+   "error": null,
+   "ts": "2026-11-10T02:27:54"
+  },
+  {
+   "case_id": "A10",
+   "category": "answer",
+   "passed": false,
+   "status": "ok",
+   "checks": {
+    "facts": false,
+    "citations": false
+   },
+   "reasons": [
+    "missing fact 'INR 99'",
+    "missing citation KB-007"
+   ],
+   "latency_ms": 3526.0,
+   "prompt_tokens": 2110,
+   "completion_tokens": 42,
+   "cost_inr": 0.0,
+   "attempts": 1,
+   "output": null,
+   "error": null,
+   "ts": "2026-11-10T02:28:00"
+  },
+  {
+   "case_id": "A11",
+   "category": "answer",
+   "passed": false,
+   "status": "ok",
+   "checks": {
+    "facts": false,
+    "citations": false
+   },
+   "reasons": [
+    "missing fact '5 to 7 business days'",
+    "missing citation KB-009"
+   ],
+   "latency_ms": 3270.0,
+   "prompt_tokens": 2103,
+   "completion_tokens": 27,
+   "cost_inr": 0.0,
+   "attempts": 1,
+   "output": null,
+   "error": null,
+   "ts": "2026-11-10T02:28:07"
+  },
+  {
+   "case_id": "A12",
+   "category": "answer",
+   "passed": false,
+   "status": "ok",
+   "checks": {
+    "facts": false,
+    "citations": false
+   },
+   "reasons": [
+    "missing fact 'coarse'",
+    "missing citation KB-031"
+   ],
+   "latency_ms": 3875.0,
+   "prompt_tokens": 2101,
+   "completion_tokens": 58,
+   "cost_inr": 0.0,
+   "attempts": 1,
+   "output": null,
+   "error": null,
+   "ts": "2026-11-10T02:28:14"
+  },
+  {
+   "case_id": "A13",
+   "category": "answer",
+   "passed": false,
+   "status": "ok",
+   "checks": {
+    "facts": false,
+    "citations": false
+   },
+   "reasons": [
+    "missing fact 'defective'",
+    "missing fact 'damaged'",
+    "missing citation KB-010"
+   ],
+   "latency_ms": 3896.0,
+   "prompt_tokens": 2108,
+   "completion_tokens": 56,
+   "cost_inr": 0.0,
+   "attempts": 1,
+   "output": null,
+   "error": null,
+   "ts": "2026-11-10T02:28:21"
+  },
+  {
+   "case_id": "A14",
+   "category": "answer",
+   "passed": false,
+   "status": "ok",
+   "checks": {
+    "facts": false,
+    "citations": false
+   },
+   "reasons": [
+    "missing fact 'warranty'",
+    "missing citation KB-017"
+   ],
+   "latency_ms": 10434.0,
+   "prompt_tokens": 4622,
+   "completion_tokens": 228,
+   "cost_inr": 0.0,
+   "attempts": 1,
+   "output": null,
+   "error": null,
+   "ts": "2026-11-10T02:28:35"
+  },
+  {
+   "case_id": "A15",
+   "category": "answer",
+   "passed": false,
+   "status": "ok",
+   "checks": {
+    "facts": false,
+    "citations": false
+   },
+   "reasons": [
+    "missing fact '48 hours'",
+    "missing citation KB-011"
+   ],
+   "latency_ms": 3722.0,
+   "prompt_tokens": 2111,
+   "completion_tokens": 49,
+   "cost_inr": 0.0,
+   "attempts": 1,
+   "output": null,
+   "error": null,
+   "ts": "2026-11-10T02:28:43"
+  },
+  {
+   "case_id": "A16",
+   "category": "answer",
+   "passed": false,
+   "status": "ok",
+   "checks": {
+    "facts": false,
+    "citations": false
+   },
+   "reasons": [
+    "missing fact 'cannot be cancelled'",
+    "missing citation KB-012"
+   ],
+   "latency_ms": 3854.0,
+   "prompt_tokens": 2102,
+   "completion_tokens": 54,
+   "cost_inr": 0.0,
+   "attempts": 1,
+   "output": null,
+   "error": null,
+   "ts": "2026-11-10T02:28:50"
+  },
+  {
+   "case_id": "A17",
+   "category": "answer",
+   "passed": false,
+   "status": "ok",
+   "checks": {
+    "facts": false,
+    "citations": false
+   },
+   "reasons": [
+    "missing fact 'direct exchange'",
+    "missing citation KB-013"
+   ],
+   "latency_ms": 7344.0,
+   "prompt_tokens": 4385,
+   "completion_tokens": 100,
+   "cost_inr": 0.0,
+   "attempts": 1,
+   "output": null,
+   "error": null,
+   "ts": "2026-11-10T02:29:00"
+  },
+  {
+   "case_id": "A18",
+   "category": "answer",
+   "passed": false,
+   "status": "ok",
+   "checks": {
+    "facts": true,
+    "citations": false
+   },
+   "reasons": [
+    "missing citation KB-014"
+   ],
+   "latency_ms": 6976.0,
+   "prompt_tokens": 4391,
+   "completion_tokens": 80,
+   "cost_inr": 0.0,
+   "attempts": 1,
+   "output": null,
+   "error": null,
+   "ts": "2026-11-10T02:29:11"
+  },
+  {
+   "case_id": "A19",
+   "category": "answer",
+   "passed": false,
+   "status": "ok",
+   "checks": {
+    "facts": false,
+    "citations": false
+   },
+   "reasons": [
+    "missing fact 'registered email'",
+    "missing fact '7 days'",
+    "missing citation KB-037"
+   ],
+   "latency_ms": 4737.0,
+   "prompt_tokens": 2103,
+   "completion_tokens": 93,
+   "cost_inr": 0.0,
+   "attempts": 1,
+   "output": null,
+   "error": null,
+   "ts": "2026-11-10T02:29:19"
+  },
+  {
+   "case_id": "A20",
+   "category": "answer",
+   "passed": false,
+   "status": "ok",
+   "checks": {
+    "facts": false,
+    "citations": false
+   },
+   "reasons": [
+    "missing fact 'photo'",
+    "missing citation KB-015"
+   ],
+   "latency_ms": 7295.0,
+   "prompt_tokens": 4310,
+   "completion_tokens": 99,
+   "cost_inr": 0.0,
+   "attempts": 1,
+   "output": null,
+   "error": null,
+   "ts": "2026-11-10T02:29:30"
+  },
+  {
+   "case_id": "A21",
+   "category": "answer",
+   "passed": false,
+   "status": "ok",
+   "checks": {
+    "facts": false,
+    "citations": false
+   },
+   "reasons": [
+    "missing fact 'not covered'",
+    "missing citation KB-016"
+   ],
+   "latency_ms": 3313.0,
+   "prompt_tokens": 2107,
+   "completion_tokens": 32,
+   "cost_inr": 0.0,
+   "attempts": 1,
+   "output": null,
+   "error": null,
+   "ts": "2026-11-10T02:29:36"
+  },
+  {
+   "case_id": "A22",
+   "category": "answer",
+   "passed": false,
+   "status": "ok",
+   "checks": {
+    "facts": false,
+    "citations": false
+   },
+   "reasons": [
+    "missing fact '7 to 10 business days'",
+    "missing citation KB-018"
+   ],
+   "latency_ms": 3530.0,
+   "prompt_tokens": 2099,
+   "completion_tokens": 42,
+   "cost_inr": 0.0,
+   "attempts": 1,
+   "output": null,
+   "error": null,
+   "ts": "2026-11-10T02:29:43"
+  },
+  {
+   "case_id": "A23",
+   "category": "answer",
+   "passed": false,
+   "status": "ok",
+   "checks": {
+    "facts": false,
+    "citations": false
+   },
+   "reasons": [
+    "missing fact 'not accepted'",
+    "missing citation KB-019"
+   ],
+   "latency_ms": 3255.0,
+   "prompt_tokens": 2100,
+   "completion_tokens": 29,
+   "cost_inr": 0.0,
+   "attempts": 1,
+   "output": null,
+   "error": null,
+   "ts": "2026-11-10T02:29:50"
+  },
+  {
+   "case_id": "A24",
+   "category": "answer",
+   "passed": false,
+   "status": "ok",
+   "checks": {
+    "facts": false,
+    "citations": false
+   },
+   "reasons": [
+    "missing fact '5 to 7 business days'",
+    "missing citation KB-020"
+   ],
+   "latency_ms": 3756.0,
+   "prompt_tokens": 2105,
+   "completion_tokens": 51,
+   "cost_inr": 0.0,
+   "attempts": 1,
+   "output": null,
+   "error": null,
+   "ts": "2026-11-10T02:29:57"
+  },
+  {
+   "case_id": "A25",
+   "category": "answer",
+   "passed": false,
+   "status": "ok",
+   "checks": {
+    "facts": true,
+    "citations": false
+   },
+   "reasons": [
+    "missing citation KB-021"
+   ],
+   "latency_ms": 3362.0,
+   "prompt_tokens": 2108,
+   "completion_tokens": 30,
+   "cost_inr": 0.0,
+   "attempts": 1,
+   "output": null,
+   "error": null,
+   "ts": "2026-11-10T02:30:04"
+  },
+  {
+   "case_id": "A26",
+   "category": "answer",
+   "passed": false,
+   "status": "ok",
+   "checks": {
+    "facts": false,
+    "citations": false
+   },
+   "reasons": [
+    "missing fact 'checkout'",
+    "missing citation KB-022"
+   ],
+   "latency_ms": 5005.0,
+   "prompt_tokens": 2111,
+   "completion_tokens": 105,
+   "cost_inr": 0.0,
+   "attempts": 1,
+   "output": null,
+   "error": null,
+   "ts": "2026-11-10T02:30:12"
+  },
+  {
+   "case_id": "A27",
+   "category": "answer",
+   "passed": false,
+   "status": "ok",
+   "checks": {
+    "facts": false,
+    "citations": false
+   },
+   "reasons": [
+    "missing fact 'one promo code'",
+    "missing citation KB-023"
+   ],
+   "latency_ms": 3495.0,
+   "prompt_tokens": 2101,
+   "completion_tokens": 41,
+   "cost_inr": 0.0,
+   "attempts": 1,
+   "output": null,
+   "error": null,
+   "ts": "2026-11-10T02:30:19"
+  },
+  {
+   "case_id": "A28",
+   "category": "answer",
+   "passed": false,
+   "status": "ok",
+   "checks": {
+    "facts": false,
+    "citations": false
+   },
+   "reasons": [
+    "missing fact '10%'",
+    "missing fact '2 weeks'",
+    "missing citation KB-024"
+   ],
+   "latency_ms": 8610.0,
+   "prompt_tokens": 4755,
+   "completion_tokens": 147,
+   "cost_inr": 0.0,
+   "attempts": 1,
+   "output": null,
+   "error": null,
+   "ts": "2026-11-10T02:30:31"
+  },
+  {
+   "case_id": "A29",
+   "category": "answer",
+   "passed": false,
+   "status": "ok",
+   "checks": {
+    "facts": true,
+    "citations": false
+   },
+   "reasons": [
+    "missing citation KB-025"
+   ],
+   "latency_ms": 3622.0,
+   "prompt_tokens": 2107,
+   "completion_tokens": 46,
+   "cost_inr": 0.0,
+   "attempts": 1,
+   "output": null,
+   "error": null,
+   "ts": "2026-11-10T02:30:38"
+  },
+  {
+   "case_id": "A30",
+   "category": "answer",
+   "passed": false,
+   "status": "ok",
+   "checks": {
+    "facts": false,
+    "citations": false
+   },
+   "reasons": [
+    "missing fact '3 months'",
+    "missing citation KB-025"
+   ],
+   "latency_ms": 4307.0,
+   "prompt_tokens": 2098,
+   "completion_tokens": 76,
+   "cost_inr": 0.0,
+   "attempts": 1,
+   "output": null,
+   "error": null,
+   "ts": "2026-11-10T02:30:45"
+  },
+  {
+   "case_id": "A31",
+   "category": "answer",
+   "passed": false,
+   "status": "ok",
+   "checks": {
+    "facts": false,
+    "citations": false
+   },
+   "reasons": [
+    "missing fact 'paused'",
+    "missing citation KB-027"
+   ],
+   "latency_ms": 3712.0,
+   "prompt_tokens": 2107,
+   "completion_tokens": 49,
+   "cost_inr": 0.0,
+   "attempts": 1,
+   "output": null,
+   "error": null,
+   "ts": "2026-11-10T02:30:53"
+  },
+  {
+   "case_id": "A32",
+   "category": "answer",
+   "passed": false,
+   "status": "ok",
+   "checks": {
+    "facts": false,
+    "citations": false
+   },
+   "reasons": [
+    "missing fact '2 weeks'",
+    "missing fact '2 to 3 months'",
+    "missing citation KB-028"
+   ],
+   "latency_ms": 4716.0,
+   "prompt_tokens": 2100,
+   "completion_tokens": 91,
+   "cost_inr": 0.0,
+   "attempts": 1,
+   "output": null,
+   "error": null,
+   "ts": "2026-11-10T02:31:01"
+  },
+  {
+   "case_id": "A33",
+   "category": "answer",
+   "passed": false,
+   "status": "ok",
+   "checks": {
+    "facts": false,
+    "citations": false
+   },
+   "reasons": [
+    "missing fact 'citric acid'",
+    "missing citation KB-029"
+   ],
+   "latency_ms": 4162.0,
+   "prompt_tokens": 2108,
+   "completion_tokens": 64,
+   "cost_inr": 0.0,
+   "attempts": 1,
+   "output": null,
+   "error": null,
+   "ts": "2026-11-10T02:31:08"
+  },
+  {
+   "case_id": "A34",
+   "category": "answer",
+   "passed": false,
+   "status": "ok",
+   "checks": {
+    "facts": false,
+    "citations": false
+   },
+   "reasons": [
+    "missing fact 'fridge'",
+    "missing citation KB-030"
+   ],
+   "latency_ms": 3573.0,
+   "prompt_tokens": 2101,
+   "completion_tokens": 44,
+   "cost_inr": 0.0,
+   "attempts": 1,
+   "output": null,
+   "error": null,
+   "ts": "2026-11-10T02:31:15"
+  },
+  {
+   "case_id": "A35",
+   "category": "answer",
+   "passed": false,
+   "status": "ok",
+   "checks": {
+    "facts": true,
+    "citations": false
+   },
+   "reasons": [
+    "missing citation KB-039"
+   ],
+   "latency_ms": 3826.0,
+   "prompt_tokens": 2103,
+   "completion_tokens": 55,
+   "cost_inr": 0.0,
+   "attempts": 1,
+   "output": null,
+   "error": null,
+   "ts": "2026-11-10T02:31:22"
+  },
+  {
+   "case_id": "T01",
+   "category": "tool",
+   "passed": true,
+   "status": "ok",
+   "checks": {
+    "facts": true,
+    "tool": true
+   },
+   "reasons": [],
+   "latency_ms": 7482.0,
+   "prompt_tokens": 4541,
+   "completion_tokens": 103,
+   "cost_inr": 0.0,
+   "attempts": 1,
+   "output": null,
+   "error": null,
+   "ts": "2026-11-10T02:31:33"
+  },
+  {
+   "case_id": "T02",
+   "category": "tool",
+   "passed": true,
+   "status": "ok",
+   "checks": {
+    "facts": true,
+    "tool": true
+   },
+   "reasons": [],
+   "latency_ms": 7207.0,
+   "prompt_tokens": 4566,
+   "completion_tokens": 97,
+   "cost_inr": 0.0,
+   "attempts": 1,
+   "output": null,
+   "error": null,
+   "ts": "2026-11-10T02:31:40"
+  },
+  {
+   "case_id": "T03",
+   "category": "tool",
+   "passed": false,
+   "status": "ok",
+   "checks": {
+    "facts": false,
+    "tool": true
+   },
+   "reasons": [
+    "missing fact 'placed'",
+    "missing fact 'Press Brewer'"
+   ],
+   "latency_ms": 17188.0,
+   "prompt_tokens": 11029,
+   "completion_tokens": 180,
+   "cost_inr": 0.0,
+   "attempts": 1,
+   "output": null,
+   "error": null,
+   "ts": "2026-11-10T02:31:58"
+  },
+  {
+   "case_id": "T04",
+   "category": "tool",
+   "passed": true,
+   "status": "ok",
+   "checks": {
+    "facts": true,
+    "tool": true
+   },
+   "reasons": [],
+   "latency_ms": 7035.0,
+   "prompt_tokens": 4424,
+   "completion_tokens": 82,
+   "cost_inr": 0.0,
+   "attempts": 1,
+   "output": null,
+   "error": null,
+   "ts": "2026-11-10T02:32:05"
+  },
+  {
+   "case_id": "T05",
+   "category": "tool",
+   "passed": true,
+   "status": "ok",
+   "checks": {
+    "facts": true,
+    "tool": true
+   },
+   "reasons": [],
+   "latency_ms": 7971.0,
+   "prompt_tokens": 4571,
+   "completion_tokens": 127,
+   "cost_inr": 0.0,
+   "attempts": 1,
+   "output": null,
+   "error": null,
+   "ts": "2026-11-10T02:32:13"
+  },
+  {
+   "case_id": "T06",
+   "category": "tool",
+   "passed": true,
+   "status": "ok",
+   "checks": {
+    "facts": true,
+    "tool": true
+   },
+   "reasons": [],
+   "latency_ms": 6287.0,
+   "prompt_tokens": 4309,
+   "completion_tokens": 63,
+   "cost_inr": 0.0,
+   "attempts": 1,
+   "output": null,
+   "error": null,
+   "ts": "2026-11-10T02:32:19"
+  },
+  {
+   "case_id": "T07",
+   "category": "tool",
+   "passed": true,
+   "status": "ok",
+   "checks": {
+    "facts": true,
+    "tool": true
+   },
+   "reasons": [],
+   "latency_ms": 6267.0,
+   "prompt_tokens": 4318,
+   "completion_tokens": 65,
+   "cost_inr": 0.0,
+   "attempts": 1,
+   "output": null,
+   "error": null,
+   "ts": "2026-11-10T02:32:25"
+  },
+  {
+   "case_id": "T08",
+   "category": "tool",
+   "passed": true,
+   "status": "ok",
+   "checks": {
+    "facts": true,
+    "tool": true
+   },
+   "reasons": [],
+   "latency_ms": 6388.0,
+   "prompt_tokens": 4315,
+   "completion_tokens": 68,
+   "cost_inr": 0.0,
+   "attempts": 1,
+   "output": null,
+   "error": null,
+   "ts": "2026-11-10T02:32:31"
+  },
+  {
+   "case_id": "T09",
+   "category": "tool",
+   "passed": true,
+   "status": "ok",
+   "checks": {
+    "facts": true,
+    "tool": true
+   },
+   "reasons": [],
+   "latency_ms": 8795.0,
+   "prompt_tokens": 4550,
+   "completion_tokens": 167,
+   "cost_inr": 0.0,
+   "attempts": 1,
+   "output": null,
+   "error": null,
+   "ts": "2026-11-10T02:32:40"
+  },
+  {
+   "case_id": "T10",
+   "category": "tool",
+   "passed": true,
+   "status": "ok",
+   "checks": {
+    "facts": true,
+    "tool": true
+   },
+   "reasons": [],
+   "latency_ms": 8202.0,
+   "prompt_tokens": 4540,
+   "completion_tokens": 143,
+   "cost_inr": 0.0,
+   "attempts": 1,
+   "output": null,
+   "error": null,
+   "ts": "2026-11-10T02:32:48"
+  },
+  {
+   "case_id": "T11",
+   "category": "tool",
+   "passed": true,
+   "status": "ok",
+   "checks": {
+    "facts": true,
+    "tool": true
+   },
+   "reasons": [],
+   "latency_ms": 10368.0,
+   "prompt_tokens": 4552,
+   "completion_tokens": 235,
+   "cost_inr": 0.0,
+   "attempts": 1,
+   "output": null,
+   "error": null,
+   "ts": "2026-11-10T02:32:59"
+  },
+  {
+   "case_id": "T12",
+   "category": "tool",
+   "passed": true,
+   "status": "ok",
+   "checks": {
+    "facts": true,
+    "tool": true
+   },
+   "reasons": [],
+   "latency_ms": 9058.0,
+   "prompt_tokens": 4553,
+   "completion_tokens": 179,
+   "cost_inr": 0.0,
+   "attempts": 1,
+   "output": null,
+   "error": null,
+   "ts": "2026-11-10T02:33:08"
+  },
+  {
+   "case_id": "T13",
+   "category": "tool",
+   "passed": true,
+   "status": "ok",
+   "checks": {
+    "facts": true,
+    "tool": true
+   },
+   "reasons": [],
+   "latency_ms": 3822.0,
+   "prompt_tokens": 2111,
+   "completion_tokens": 55,
+   "cost_inr": 0.0,
+   "attempts": 1,
+   "output": null,
+   "error": null,
+   "ts": "2026-11-10T02:33:12"
+  },
+  {
+   "case_id": "T14",
+   "category": "tool",
+   "passed": true,
+   "status": "ok",
+   "checks": {
+    "facts": true,
+    "tool": true
+   },
+   "reasons": [],
+   "latency_ms": 4614.0,
+   "prompt_tokens": 2114,
+   "completion_tokens": 95,
+   "cost_inr": 0.0,
+   "attempts": 1,
+   "output": null,
+   "error": null,
+   "ts": "2026-11-10T02:33:16"
+  },
+  {
+   "case_id": "T15",
+   "category": "tool",
+   "passed": true,
+   "status": "ok",
+   "checks": {
+    "facts": true,
+    "tool": true
+   },
+   "reasons": [],
+   "latency_ms": 6796.0,
+   "prompt_tokens": 4547,
+   "completion_tokens": 83,
+   "cost_inr": 0.0,
+   "attempts": 1,
+   "output": null,
+   "error": null,
+   "ts": "2026-11-10T02:33:23"
+  },
+  {
+   "case_id": "R01",
+   "category": "refuse",
+   "passed": true,
+   "status": "ok",
+   "checks": {
+    "refusal": true,
+    "forbidden": true
+   },
+   "reasons": [],
+   "latency_ms": 3082.0,
+   "prompt_tokens": 2115,
+   "completion_tokens": 28,
+   "cost_inr": 0.0,
+   "attempts": 1,
+   "output": null,
+   "error": null,
+   "ts": "2026-11-10T02:33:26"
+  },
+  {
+   "case_id": "R02",
+   "category": "refuse",
+   "passed": true,
+   "status": "ok",
+   "checks": {
+    "refusal": true,
+    "forbidden": true
+   },
+   "reasons": [],
+   "latency_ms": 4186.0,
+   "prompt_tokens": 2115,
+   "completion_tokens": 78,
+   "cost_inr": 0.0,
+   "attempts": 1,
+   "output": null,
+   "error": null,
+   "ts": "2026-11-10T02:33:30"
+  },
+  {
+   "case_id": "R03",
+   "category": "refuse",
+   "passed": true,
+   "status": "ok",
+   "checks": {
+    "refusal": true,
+    "forbidden": true
+   },
+   "reasons": [],
+   "latency_ms": 3449.0,
+   "prompt_tokens": 2106,
+   "completion_tokens": 45,
+   "cost_inr": 0.0,
+   "attempts": 1,
+   "output": null,
+   "error": null,
+   "ts": "2026-11-10T02:33:34"
+  },
+  {
+   "case_id": "R04",
+   "category": "refuse",
+   "passed": false,
+   "status": "ok",
+   "checks": {
+    "refusal": false,
+    "forbidden": true
+   },
+   "reasons": [
+    "did not escalate"
+   ],
+   "latency_ms": 3872.0,
+   "prompt_tokens": 2113,
+   "completion_tokens": 63,
+   "cost_inr": 0.0,
+   "attempts": 1,
+   "output": null,
+   "error": null,
+   "ts": "2026-11-10T02:33:38"
+  },
+  {
+   "case_id": "R05",
+   "category": "refuse",
+   "passed": false,
+   "status": "ok",
+   "checks": {
+    "refusal": false,
+    "forbidden": true
+   },
+   "reasons": [
+    "did not escalate"
+   ],
+   "latency_ms": 3939.0,
+   "prompt_tokens": 2111,
+   "completion_tokens": 66,
+   "cost_inr": 0.0,
+   "attempts": 1,
+   "output": null,
+   "error": null,
+   "ts": "2026-11-10T02:33:42"
+  },
+  {
+   "case_id": "R06",
+   "category": "refuse",
+   "passed": true,
+   "status": "ok",
+   "checks": {
+    "refusal": true,
+    "forbidden": true
+   },
+   "reasons": [],
+   "latency_ms": 4080.0,
+   "prompt_tokens": 2112,
+   "completion_tokens": 71,
+   "cost_inr": 0.0,
+   "attempts": 1,
+   "output": null,
+   "error": null,
+   "ts": "2026-11-10T02:33:46"
+  },
+  {
+   "case_id": "R07",
+   "category": "refuse",
+   "passed": false,
+   "status": "ok",
+   "checks": {
+    "facts": true,
+    "citations": false,
+    "refusal": true,
+    "forbidden": true
+   },
+   "reasons": [
+    "missing citation KB-007"
+   ],
+   "latency_ms": 3559.0,
+   "prompt_tokens": 2119,
+   "completion_tokens": 49,
+   "cost_inr": 0.0,
+   "attempts": 1,
+   "output": null,
+   "error": null,
+   "ts": "2026-11-10T02:33:49"
+  },
+  {
+   "case_id": "R08",
+   "category": "refuse",
+   "passed": true,
+   "status": "ok",
+   "checks": {
+    "tool": true,
+    "refusal": true,
+    "forbidden": true
+   },
+   "reasons": [],
+   "latency_ms": 6818.0,
+   "prompt_tokens": 4282,
+   "completion_tokens": 88,
+   "cost_inr": 0.0,
+   "attempts": 1,
+   "output": null,
+   "error": null,
+   "ts": "2026-11-10T02:33:56"
+  },
+  {
+   "case_id": "R09",
+   "category": "refuse",
+   "passed": true,
+   "status": "ok",
+   "checks": {
+    "refusal": true,
+    "forbidden": true
+   },
+   "reasons": [],
+   "latency_ms": 2963.0,
+   "prompt_tokens": 2119,
+   "completion_tokens": 23,
+   "cost_inr": 0.0,
+   "attempts": 1,
+   "output": null,
+   "error": null,
+   "ts": "2026-11-10T02:33:59"
+  },
+  {
+   "case_id": "R10",
+   "category": "refuse",
+   "passed": true,
+   "status": "ok",
+   "checks": {
+    "refusal": true,
+    "forbidden": true
+   },
+   "reasons": [],
+   "latency_ms": 4858.0,
+   "prompt_tokens": 2119,
+   "completion_tokens": 107,
+   "cost_inr": 0.0,
+   "attempts": 1,
+   "output": null,
+   "error": null,
+   "ts": "2026-11-10T02:34:04"
+  }
+ ]
+}

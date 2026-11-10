@@ -1,0 +1,12 @@
+{
+ "taken_from": "../fde-support-agent",
+ "results_file": "20261110-023435-agent.jsonl",
+ "sha256": {
+  "agent-results.jsonl": "eb57c088a6d01f4e582cf0105d608f465b184107c4db466101546974d1608273",
+  "evals/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "evals/cases.jsonl": "a805cda56e92c482104f735172c8270cad9be00eb27a20658f9a2f2c8df5b0c3",
+  "evals/run.py": "b847911c79e70615a4f0887e0b07a7beca601e639840324991a2605c79280af5",
+  "evals/scoring.py": "7fb02d37dc01ff331434dd56f4bf220c0edf2fa380417971984485ee70d45b7e"
+ },
+ "note": "Frozen copy of project 1 files for the parity test. Do not edit; rerun scripts/make_fixtures.py."
+}

@@ -1,0 +1,40 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+          cache: pip
+          cache-dependency-path: requirements.txt
+      - run: pip install -r requirements.txt
+
+      - name: Lint
+        run: bash scripts/ci.sh lint
+
+      - name: Unit tests (fake adapters, stub of project 1, parity on recorded replies)
+        run: bash scripts/ci.sh tests
+
+      # CI cannot run the models, so the gate runs on committed fixture runs: real recorded runs of
+      # project 1. The step asserts exit 0 for an improvement that is within noise, 1 for two kinds of regression, 2 for runs
+      # that cannot be compared. A gate that cannot fail is not a gate.
+      - name: Regression gate on recorded fixture runs
+        run: bash scripts/ci.sh gate
+
+      - name: Smoke run on the synthetic suite (run, compare, matrix, monitor alert proof)
+        run: bash scripts/ci.sh smoke
+
+      - name: Upload reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: harness-reports
+          path: ci-reports/
+          if-no-files-found: ignore

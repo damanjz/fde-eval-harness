@@ -1,0 +1,421 @@
+{
+ "format": "fde-harness-run/1",
+ "run": {
+  "run_id": "support_agent-p1-run4-agent-first20",
+  "suite": "support_agent",
+  "model": "fusion27b:iq3",
+  "status": "complete",
+  "label": "support_agent-p1-run4-agent-first20",
+  "started_at": "2026-11-10T01:55:36",
+  "finished_at": "2026-11-10T02:02:12",
+  "git_hash": null,
+  "prompt_hash": null,
+  "code_hash": null,
+  "case_set_hash": "5e48b965e0c0",
+  "n_cases": 20,
+  "config": {
+   "source": "project 1 evals/results/20261110-015524-agent.jsonl (first 20 cases)",
+   "variant": "agent",
+   "imported": true,
+   "judge": null,
+   "limit": 20,
+   "ids": null,
+   "n_cases_total": 60,
+   "scorer_hash": "56ade287dfab",
+   "clock_now": null,
+   "note": "Imported from recorded results. Project 1 did not store the model name, the case file, the scoring code or the clock per run: the model is as named at import, case_set_hash and scorer_hash are those of the current cases.jsonl and scoring.py, and the runs used the wall clock."
+  },
+  "notes": null
+ },
+ "results": [
+  {
+   "case_id": "A01",
+   "category": "answer",
+   "passed": true,
+   "status": "ok",
+   "checks": {
+    "facts": true,
+    "citations": true
+   },
+   "reasons": [],
+   "latency_ms": 11984.0,
+   "prompt_tokens": 3270,
+   "completion_tokens": 43,
+   "cost_inr": 0.0,
+   "attempts": 1,
+   "output": null,
+   "error": null,
+   "ts": "2026-11-10T01:55:36"
+  },
+  {
+   "case_id": "A02",
+   "category": "answer",
+   "passed": true,
+   "status": "ok",
+   "checks": {
+    "facts": true,
+    "citations": true
+   },
+   "reasons": [],
+   "latency_ms": 12220.0,
+   "prompt_tokens": 3441,
+   "completion_tokens": 49,
+   "cost_inr": 0.0,
+   "attempts": 1,
+   "output": null,
+   "error": null,
+   "ts": "2026-11-10T01:55:54"
+  },
+  {
+   "case_id": "A03",
+   "category": "answer",
+   "passed": true,
+   "status": "ok",
+   "checks": {
+    "facts": true,
+    "citations": true
+   },
+   "reasons": [],
+   "latency_ms": 14929.0,
+   "prompt_tokens": 3328,
+   "completion_tokens": 69,
+   "cost_inr": 0.0,
+   "attempts": 1,
+   "output": null,
+   "error": null,
+   "ts": "2026-11-10T01:56:16"
+  },
+  {
+   "case_id": "A04",
+   "category": "answer",
+   "passed": true,
+   "status": "ok",
+   "checks": {
+    "facts": true,
+    "citations": true
+   },
+   "reasons": [],
+   "latency_ms": 13578.0,
+   "prompt_tokens": 3395,
+   "completion_tokens": 62,
+   "cost_inr": 0.0,
+   "attempts": 1,
+   "output": null,
+   "error": null,
+   "ts": "2026-11-10T01:56:37"
+  },
+  {
+   "case_id": "A05",
+   "category": "answer",
+   "passed": true,
+   "status": "ok",
+   "checks": {
+    "facts": true,
+    "citations": true
+   },
+   "reasons": [],
+   "latency_ms": 14247.0,
+   "prompt_tokens": 3182,
+   "completion_tokens": 70,
+   "cost_inr": 0.0,
+   "attempts": 1,
+   "output": null,
+   "error": null,
+   "ts": "2026-11-10T01:56:58"
+  },
+  {
+   "case_id": "A06",
+   "category": "answer",
+   "passed": true,
+   "status": "ok",
+   "checks": {
+    "facts": true,
+    "citations": true
+   },
+   "reasons": [],
+   "latency_ms": 13540.0,
+   "prompt_tokens": 3292,
+   "completion_tokens": 56,
+   "cost_inr": 0.0,
+   "attempts": 1,
+   "output": null,
+   "error": null,
+   "ts": "2026-11-10T01:57:18"
+  },
+  {
+   "case_id": "A07",
+   "category": "answer",
+   "passed": false,
+   "status": "ok",
+   "checks": {
+    "facts": true,
+    "citations": false
+   },
+   "reasons": [
+    "missing citation KB-005"
+   ],
+   "latency_ms": 10582.0,
+   "prompt_tokens": 3322,
+   "completion_tokens": 34,
+   "cost_inr": 0.0,
+   "attempts": 1,
+   "output": null,
+   "error": null,
+   "ts": "2026-11-10T01:57:35"
+  },
+  {
+   "case_id": "A08",
+   "category": "answer",
+   "passed": false,
+   "status": "ok",
+   "checks": {
+    "facts": false,
+    "citations": true
+   },
+   "reasons": [
+    "missing fact 'cannot'"
+   ],
+   "latency_ms": 15507.0,
+   "prompt_tokens": 3254,
+   "completion_tokens": 86,
+   "cost_inr": 0.0,
+   "attempts": 1,
+   "output": null,
+   "error": null,
+   "ts": "2026-11-10T01:57:57"
+  },
+  {
+   "case_id": "A09",
+   "category": "answer",
+   "passed": true,
+   "status": "ok",
+   "checks": {
+    "facts": true,
+    "citations": true
+   },
+   "reasons": [],
+   "latency_ms": 15254.0,
+   "prompt_tokens": 3479,
+   "completion_tokens": 72,
+   "cost_inr": 0.0,
+   "attempts": 1,
+   "output": null,
+   "error": null,
+   "ts": "2026-11-10T01:58:18"
+  },
+  {
+   "case_id": "A10",
+   "category": "answer",
+   "passed": true,
+   "status": "ok",
+   "checks": {
+    "facts": true,
+    "citations": true
+   },
+   "reasons": [],
+   "latency_ms": 12720.0,
+   "prompt_tokens": 3405,
+   "completion_tokens": 55,
+   "cost_inr": 0.0,
+   "attempts": 1,
+   "output": null,
+   "error": null,
+   "ts": "2026-11-10T01:58:37"
+  },
+  {
+   "case_id": "A11",
+   "category": "answer",
+   "passed": true,
+   "status": "ok",
+   "checks": {
+    "facts": true,
+    "citations": true
+   },
+   "reasons": [],
+   "latency_ms": 11354.0,
+   "prompt_tokens": 3360,
+   "completion_tokens": 41,
+   "cost_inr": 0.0,
+   "attempts": 1,
+   "output": null,
+   "error": null,
+   "ts": "2026-11-10T01:58:55"
+  },
+  {
+   "case_id": "A12",
+   "category": "answer",
+   "passed": true,
+   "status": "ok",
+   "checks": {
+    "facts": true,
+    "citations": true
+   },
+   "reasons": [],
+   "latency_ms": 13035.0,
+   "prompt_tokens": 3411,
+   "completion_tokens": 47,
+   "cost_inr": 0.0,
+   "attempts": 1,
+   "output": null,
+   "error": null,
+   "ts": "2026-11-10T01:59:15"
+  },
+  {
+   "case_id": "A13",
+   "category": "answer",
+   "passed": false,
+   "status": "ok",
+   "checks": {
+    "facts": false,
+    "citations": true
+   },
+   "reasons": [
+    "missing fact 'defective'",
+    "missing fact 'damaged'"
+   ],
+   "latency_ms": 15310.0,
+   "prompt_tokens": 3433,
+   "completion_tokens": 79,
+   "cost_inr": 0.0,
+   "attempts": 1,
+   "output": null,
+   "error": null,
+   "ts": "2026-11-10T01:59:36"
+  },
+  {
+   "case_id": "A14",
+   "category": "answer",
+   "passed": true,
+   "status": "ok",
+   "checks": {
+    "facts": true,
+    "citations": true
+   },
+   "reasons": [],
+   "latency_ms": 13477.0,
+   "prompt_tokens": 3036,
+   "completion_tokens": 61,
+   "cost_inr": 0.0,
+   "attempts": 1,
+   "output": null,
+   "error": null,
+   "ts": "2026-11-10T01:59:56"
+  },
+  {
+   "case_id": "A15",
+   "category": "answer",
+   "passed": false,
+   "status": "ok",
+   "checks": {
+    "facts": true,
+    "citations": false
+   },
+   "reasons": [
+    "missing citation KB-011"
+   ],
+   "latency_ms": 13437.0,
+   "prompt_tokens": 3601,
+   "completion_tokens": 48,
+   "cost_inr": 0.0,
+   "attempts": 1,
+   "output": null,
+   "error": null,
+   "ts": "2026-11-10T02:00:15"
+  },
+  {
+   "case_id": "A16",
+   "category": "answer",
+   "passed": true,
+   "status": "ok",
+   "checks": {
+    "facts": true,
+    "citations": true
+   },
+   "reasons": [],
+   "latency_ms": 12625.0,
+   "prompt_tokens": 2920,
+   "completion_tokens": 60,
+   "cost_inr": 0.0,
+   "attempts": 1,
+   "output": null,
+   "error": null,
+   "ts": "2026-11-10T02:00:34"
+  },
+  {
+   "case_id": "A17",
+   "category": "answer",
+   "passed": true,
+   "status": "ok",
+   "checks": {
+    "facts": true,
+    "citations": true
+   },
+   "reasons": [],
+   "latency_ms": 14213.0,
+   "prompt_tokens": 3390,
+   "completion_tokens": 66,
+   "cost_inr": 0.0,
+   "attempts": 1,
+   "output": null,
+   "error": null,
+   "ts": "2026-11-10T02:00:53"
+  },
+  {
+   "case_id": "A18",
+   "category": "answer",
+   "passed": true,
+   "status": "ok",
+   "checks": {
+    "facts": true,
+    "citations": true
+   },
+   "reasons": [],
+   "latency_ms": 15817.0,
+   "prompt_tokens": 3473,
+   "completion_tokens": 77,
+   "cost_inr": 0.0,
+   "attempts": 1,
+   "output": null,
+   "error": null,
+   "ts": "2026-11-10T02:01:15"
+  },
+  {
+   "case_id": "A19",
+   "category": "answer",
+   "passed": true,
+   "status": "ok",
+   "checks": {
+    "facts": true,
+    "citations": true
+   },
+   "reasons": [],
+   "latency_ms": 20261.0,
+   "prompt_tokens": 2888,
+   "completion_tokens": 131,
+   "cost_inr": 0.0,
+   "attempts": 1,
+   "output": null,
+   "error": null,
+   "ts": "2026-11-10T02:01:42"
+  },
+  {
+   "case_id": "A20",
+   "category": "answer",
+   "passed": true,
+   "status": "ok",
+   "checks": {
+    "facts": true,
+    "citations": true
+   },
+   "reasons": [],
+   "latency_ms": 21841.0,
+   "prompt_tokens": 3494,
+   "completion_tokens": 134,
+   "cost_inr": 0.0,
+   "attempts": 1,
+   "output": null,
+   "error": null,
+   "ts": "2026-11-10T02:02:12"
+  }
+ ]
+}

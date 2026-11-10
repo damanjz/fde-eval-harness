@@ -1,0 +1,4 @@
+# The harness core is standard library only. These are for tests and lint.
+pytest>=8
+ruff>=0.6
+pyyaml>=6  # reads the CI workflow in tests
