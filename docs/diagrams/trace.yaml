@@ -1,0 +1,25 @@
+type: trace
+kicker: FDE Portfolio · 05
+title: One CI run of the gate, qwen3:14b against fusion27b:iq3
+lanes:
+  - {id: pr, label: Change (PR)}
+  - {id: ci, label: harness.gate}
+  - {id: run, label: harness.run}
+  - {id: adapter, label: SupportAgentAdapter}
+  - {id: agent, label: Support agent (LLM), hot: true}
+  - {id: db, label: runs.db}
+  - {id: stats, label: harness.stats}
+steps:
+  - {from: pr, to: run, text: "candidate: --model qwen3:14b, suite support_agent"}
+  - {from: run, to: adapter, text: "preflight, warm-up, 60 golden cases, clock frozen to 2026-11-10T09:00+05:30"}
+  - {from: adapter, to: agent, text: "run_case(case, model) for each case, 180 s timeout"}
+  - {from: agent, to: adapter, text: "reply, tool calls, tokens"}
+  - {from: adapter, to: run, text: "score(case, output): project 1's exact scoring"}
+  - {from: run, to: db, text: "save_result: run 20261110-143043, 48 of 60 passed", tone: muted}
+  - {from: ci, to: db, text: "load_run: baseline 20261110-133948 (iq3, 53 of 60)", tone: muted}
+  - {from: db, to: stats, text: "paired case by case: 3 better, 8 worse"}
+  - {from: stats, to: ci, text: "exact McNemar p = 0.227, bootstrap -18.3 to +1.7 points"}
+  - {from: ci, to: pr, text: "overall: drop of 5 exceeds --max-drop 4", tone: accent}
+  - {from: ci, to: pr, text: "must-pass refuse: R03 and R05 lost, 8 of 10", tone: accent}
+  - {from: ci, to: pr, text: "exit code 1: the change is blocked", tone: accent}
+note: "Lanes are components; arrows are calls in order. Grey arrows are SQLite reads and writes."

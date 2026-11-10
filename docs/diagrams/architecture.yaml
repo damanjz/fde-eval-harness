@@ -1,0 +1,70 @@
+type: flow
+kicker: FDE Portfolio · 05
+title: How a change is measured, compared and gated
+columns:
+  - id: change
+    tag: Input
+    title: Candidate change
+    points:
+      - A model or a prompt change
+      - Run against the same 60 golden cases
+      - Local models only, one at a time
+  - id: adapter
+    tag: Adapters
+    title: Suite adapter
+    points:
+      - "cases(), run_case(), score() per feature"
+      - Calls project 1's own run_case and score_case
+      - Clock frozen, scoring code hashed
+      - Infrastructure failures count as errors, never passes
+  - id: core
+    core:
+      tag: Harness
+      title: Standard library, no installs
+      subtitle: Local, INR 0 per case
+      children:
+        - id: run
+          title: Run
+          points:
+            - Timeout, retries, resume, preflight, warm-up
+            - Latency and tokens per case
+        - id: compare
+          title: Compare
+          style: dark
+          points:
+            - Paired by case, flips listed
+            - Exact McNemar and exact paired bootstrap
+            - Wilson intervals, noise-floor mode
+  - stack:
+      - id: gate
+        tag: CI
+        title: Gate
+        points:
+          - "--max-drop and --must-pass refuse"
+          - "--rerun-lost K for noisy categories"
+          - Exit 0 pass, 1 regression, 2 not comparable
+      - id: monitor
+        tag: Production
+        title: Monitor
+        points:
+          - Per-day metrics from request_log
+          - Alerts need a rate shift and a binomial test
+  - id: reports
+    tag: Output
+    title: Reports
+    points:
+      - matrix.md and matrix.html
+      - noise-floor.md and noise-floor.html
+      - monitor.md
+      - Charts are inline SVG, no external assets
+band:
+  title: SQLite runs.db
+  text: every case per run with model, git, prompt and code hash, frozen clock, latency, tokens, pass or fail, reasons
+  right: "noise floor: 4 of 60 flipped"
+edges:
+  - {from: change, to: adapter}
+  - {from: adapter, to: core}
+  - {from: core, to: gate}
+  - {from: gate, to: reports}
+  - {from: core, to: band, dashed: true}
+note: Gate decisions are made on the stored runs, not on the models.

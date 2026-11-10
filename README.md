@@ -1,10 +1,38 @@
 # FDE eval and monitoring harness
 
-One harness for Larkfield Coffee Co.'s AI features (fictional customer, FDE Portfolio project 5). It runs each feature's golden set against any model, compares runs with honest statistics, blocks regressions in CI, and watches production logs for drift. Local only, standard library only, no installs.
+One harness for Larkfield Coffee Co.'s AI features: it runs each feature's golden set against any local model, compares runs with honest statistics, blocks regressions in CI, and watches production logs for drift. Built for the engineer who ships prompt, model or data changes, and the support lead who reads the monitor. Local only, standard library only, no installs.
 
-## Results: live run, 2026-11-10
+[![FDE eval harness demo reel](docs/media/reel.gif)](docs/media/reel.mp4)
 
-Three local models on project 1's 60 cases, one run each, project 1's exact scoring, the frozen dataset clock (2026-11-10T09:00:00+05:30), project 1 commit `8ae4bb9`. Tables below are copied from `reports/matrix.md` (generated 2026-11-10 14:37) and `reports/noise-floor.md`; open `reports/matrix.html` and `reports/noise-floor.html` for the charts. `runs.db` also holds two earlier runs that are not used: `20261110-052006` (iq3, 53/60, made before a project 1 commit) and `20261110-053950` (q4ks, incomplete, abandoned at a reboot).
+<sub>29-second reel. Click for the full video.</sub>
+
+| Noise floor | Gate on a risky swap | Bigger model |
+|---|---|---|
+| **4 of 60** cases flipped between two identical runs, so `--max-drop` is 4 (`reports/noise-floor.md`) | **2 of 10** refuse cases fail on `qwen3:14b`, so the gate blocks it, though it is about 1.2 times faster on a clean run (`reports/matrix.md`) | **53/60 vs 55/60**, McNemar p = 0.688: `fusion27b:q4ks` over `fusion27b:iq3` is within noise (`reports/matrix.md`) |
+
+## The problem
+
+Larkfield Coffee Co. (fictional) ships AI features, and every prompt, model or data change can silently break one. Each feature measured itself in its own way, so nobody could answer "is this change safe?" or "did production drift?" with one number and a plain-words verdict.
+
+## Architecture
+
+![Architecture: a candidate change goes through the suite adapter and the harness into the gate, with every run stored in SQLite](docs/diagrams/architecture.svg)
+
+- The harness measures what each feature's own eval measures. The `support_agent` adapter calls project 1's `evals.run.run_case` and `evals.scoring.score_case`, and a parity test reproduces all 60 recorded results.
+- No LLM judge in the gate. Project 1's judge uses the model under test, so it would move with the candidate.
+- A pass is never an infrastructure failure. Project 1 turns every exception into a hand-off reply, which can pass a refuse case; the adapter records a failed or timed-out request as an error, counted as a failure.
+- A run is identified by feature version, prompt, case file, scoring code (`scorer_hash`), frozen clock and variant. The gate exits 2 when two runs differ in any of them, or when either run does not cover the whole case file.
+- Every comparison says what is noise: exact McNemar on paired flips, an exact paired bootstrap (every resample enumerated, no seed) and Wilson intervals.
+
+## One request, traced
+
+![Trace: one CI run of the gate, qwen3:14b against fusion27b:iq3, ending in exit code 1](docs/diagrams/trace.svg)
+
+A candidate model runs the 60 golden cases through the adapter, the results are paired case by case against the baseline in `runs.db`, and the gate exits 1 because the overall drop and the must-pass refuse category both fail.
+
+## Results
+
+Live run, 2026-11-10: three local models on project 1's 60 cases, one run each, project 1's exact scoring, the frozen dataset clock (2026-11-10T09:00:00+05:30), project 1 commit `8ae4bb9`. Tables are copied from `reports/matrix.md` (generated 2026-11-10 14:37) and `reports/noise-floor.md`; open `reports/matrix.html` and `reports/noise-floor.html` for the charts. `runs.db` also holds two earlier runs that are not used: `20261110-052006` (iq3, 53/60, made before a project 1 commit) and `20261110-053950` (q4ks, incomplete, abandoned at a reboot).
 
 ### Model matrix
 
@@ -24,7 +52,7 @@ Three local models on project 1's 60 cases, one run each, project 1's exact scor
 | fusion27b:q4ks | 22.9s | 136.5s | 4419 | 98 | INR 0.00 | INR 0.00 |
 | qwen3:14b | 5.9s | 9.1s | 3949 | 87 | INR 0.00 | INR 0.00 |
 
-Latency is wall time per case measured by the harness, over cases that completed. Local models cost INR 0; set --price-in and --price-out for paid models.
+Latency is wall time per case measured by the harness, over cases that completed. Local models cost INR 0; set `--price-in` and `--price-out` for paid models.
 
 Latency caveat: the first iq3 run shared the GPU with other work. Its p50 of 16.2 s (p95 29.2 s) falls to 7.1 s (12.6 s) in the noise-floor rerun of the same configuration, below, so the first run's iq3 latency is inflated and the rerun's is the cleaner iq3 figure. Token counts are not affected.
 
@@ -49,7 +77,7 @@ Paired by case. A flip is a case one model passes and the other fails. McNemar i
 #### Notes
 
 - fusion27b:q4ks: run 20261110-135652-support-agent-fusion27b-q4ks is partial; errored or missing cases count as failures.
-- Not in the matrix or incomplete: fusion27b:q4ks (run incomplete; rerun with --resume)
+- Not in the matrix or incomplete: fusion27b:q4ks (run incomplete; rerun with `--resume`).
 
 The q4ks run has one timed-out case, counted as a failure (55/60 includes it); `--resume` would retry it.
 
@@ -85,12 +113,12 @@ WITHIN NOISE: the difference is too small to tell from chance.
 #### What the noise floor says
 
 - Same configuration, run twice: 4 of 60 cases flipped (1 pass to fail, 3 fail to pass), a net swing of 2 case(s). Nothing changed between the runs, so all of it is noise.
-- Seen from a gate (first run as baseline, second as candidate), the overall drop was 0 case(s): a --max-drop of 0 or more would have let this pair through. Noise can swing the other way too.
-- Statistically, with 4 flips a net change of up to 4 case(s) cannot be told from noise (p >= 0.05). Take the larger of 0 and 4 (4) as a starting point for --max-drop. It is one pair of runs, a small sample of the noise: repeat the rerun to firm it up.
-- Per category (the cost of a strict per-case must-pass; compare with --rerun-lost K in harness.gate):
-- answer: 3 of 35 cases flipped; none of the 29 cases that passed in the first run failed in the second; one pair only bounds the per-case rate below about 10% (rule of three), so the false-block rate is bounded, not measured.
-- refuse: 0 of 10 cases flipped; none of the 10 cases that passed in the first run failed in the second; one pair only bounds the per-case rate below about 30% (rule of three), so the false-block rate is bounded, not measured.
-- tool: 1 of 15 cases flipped; 1 of 14 cases that passed in the first run failed in the second (7%), so a strict per-case gate on this category would have blocked this pair; if that rate holds, about 65% of reruns of an unchanged configuration would be blocked.
+- Seen from a gate (first run as baseline, second as candidate), the overall drop was 0 case(s): a `--max-drop` of 0 or more would have let this pair through. Noise can swing the other way too.
+- Statistically, with 4 flips a net change of up to 4 case(s) cannot be told from noise (p >= 0.05). Take the larger of 0 and 4 (4) as a starting point for `--max-drop`. It is one pair of runs, a small sample of the noise: repeat the rerun to firm it up.
+- Per category (the cost of a strict per-case must-pass; compare with `--rerun-lost K` in `harness.gate`):
+  - answer: 3 of 35 cases flipped; none of the 29 cases that passed in the first run failed in the second; one pair only bounds the per-case rate below about 10% (rule of three), so the false-block rate is bounded, not measured.
+  - refuse: 0 of 10 cases flipped; none of the 10 cases that passed in the first run failed in the second; one pair only bounds the per-case rate below about 30% (rule of three), so the false-block rate is bounded, not measured.
+  - tool: 1 of 15 cases flipped; 1 of 14 cases that passed in the first run failed in the second (7%), so a strict per-case gate on this category would have blocked this pair; if that rate holds, about 65% of reruns of an unchanged configuration would be blocked.
 
 Reading: 4 of 60 cases flipped between identical runs, so about 7% of the cases flip from run to run. The recommended `--max-drop` is 4: it is the net change that cannot be told from noise at 4 flips, and the observed overall drop in this pair was 0. It is one pair of runs, a small sample of the noise; repeat the rerun to firm it up. The gate CLI default is still 2 (the spec's example), so pass `--max-drop 4` explicitly. A strict per-case `--must-pass tool` gate would have blocked this pair (1 of 14 passing tool cases failed on the rerun, 65% of reruns blocked if that rate holds), so use `--rerun-lost K` for categories that flip. `--must-pass refuse` is the one to keep: no refuse case flipped in this pair (the rate is bounded below about 30%, not measured). Details: `docs/runbook.md`.
 
@@ -106,21 +134,18 @@ Reading: 4 of 60 cases flipped between identical runs, so about 7% of the cases 
 
 Latency is wall time per case measured by the harness, over cases that completed.
 
-## What it does
+## How it was tested
 
-| Piece | Command | Output |
-|---|---|---|
-| Run | `python -m harness.run --suite support_agent --model fusion27b:iq3 [--limit N] [--resume]` | `runs.db` (SQLite): every case with model, git hash, prompt hash, latency, tokens, pass or fail, reasons |
-| Compare | `python -m harness.compare RUN_A RUN_B [--noise-floor] [--html FILE]` | per-category deltas, flipped cases, latency and token deltas, McNemar and bootstrap in plain words |
-| Gate | `python -m harness.gate --baseline RUN --candidate RUN --max-drop 4 --must-pass refuse [--rerun-lost K]` | exit 0 pass, 1 regression, 2 not comparable or unusable (never a crash as 1) |
-| Matrix | `python -m harness.matrix --suite support_agent --models fusion27b:iq3,fusion27b:q4ks,qwen3:14b` | `reports/matrix.md` and `reports/matrix.html` (inline SVG, no external assets) |
-| Monitor | `python -m harness.monitor` | `reports/monitor.md`: per-day metrics from project 1's `request_log`, drift alerts |
+- The numbers: McNemar p-values equal an independent brute-force computation with exact fractions over a grid of flip counts. The bootstrap is checked against brute-force enumeration of all 3^n draws for small n, and against a 200,000-resample Monte Carlo for a 50-case run. Wilson intervals match known values.
+- Parity: all 60 replies in project 1's latest complete agent results, scored through the adapter, reproduce its recorded pass or fail, checks and reasons, with a frozen copy of its scoring code (runs in CI) and with its current code (local).
+- The gate: CI asserts exit 0 on an improvement within noise, 1 on two kinds of regression (including a lost refuse case inside the overall tolerance, project 1's runs 3 and 4: 55/60 to 54/60, McNemar p = 1.000), and 2 on a `--limit` run. A crash is never exit 1.
+- The monitor: alert logic is proved on a seeded synthetic log with planted drift (`python -m harness.monitor --self-test`). Threshold-only alerts gave a false alarm on 3 of the first 12 seeded logs, so rate alerts also need an exact binomial p below 0.0001. Over 100 seeded logs at 120 requests a day the planted drift fired every time with no stray alert; the planted hand-off spike was found in 95% of logs at 60 a day and 100% from 80, so the monitor is valid from about 80 requests a day.
+- Before any live run, all 60 real cases ran through `harness.run` on project 1's real retrieval, tools and database with its LLM mocked: no errors, provenance recorded.
+- What the numbers do not claim: one run per model, so a gap of a few points is noise. The first iq3 latency is inflated by a shared GPU. The noise floor is one pair of runs. The fixtures are recorded runs, not live ones.
 
-Suites: `support_agent` (project 1), `ask_your_data` (project 4), `fake` (synthetic, for tests and CI; its reports carry a SYNTHETIC banner).
+## Run it
 
-## Live commands (what produced the results above; rerun to refresh)
-
-Prerequisites: Ollama running with `fusion27b:iq3`, `fusion27b:q4ks`, `qwen3:14b` and `nomic-embed-text`; project 1's Postgres up and ingested (`docker compose up -d db`, then `python -m app.ingest` in its repo); project 1 has its `clock_now` setting (preflight checks); the GPU free (project 1's own eval not running). Run from this folder.
+Prerequisites for live runs: Ollama running with `fusion27b:iq3`, `fusion27b:q4ks`, `qwen3:14b` and `nomic-embed-text`; project 1's Postgres up and ingested (`docker compose up -d db`, then `python -m app.ingest` in its repo); project 1 has its `clock_now` setting (preflight checks); the GPU free. Run from this folder.
 
 ```
 PY=python
@@ -136,14 +161,16 @@ $PY -m harness.run --suite support_agent --model fusion27b:iq3 --timeout 180 --l
 $PY -m harness.runs list --suite support_agent
 $PY -m harness.compare RUN_ID_OF_FIRST_IQ3 RUN_ID_OF_SECOND_IQ3 --noise-floor --md reports/noise-floor.md --html reports/noise-floor.html
 
-# 4. monitoring from project 1's real request_log (read-only)
+# 4. the gate: exit 0 pass, 1 regression, 2 not comparable
+$PY -m harness.gate --baseline RUN --candidate RUN --max-drop 4 --must-pass refuse [--rerun-lost K]
+
+# 5. monitoring from project 1's real request_log (read-only)
 $PY -m harness.monitor
 ```
 
 `--timeout 180` matches project 1's own eval. If a run is interrupted, rerun the same command with `--resume`. The matrix and the noise-floor rerun share `runs.db`: write `reports/matrix.*` before the rerun, or pass `--pin MODEL=RUN_ID` to `--report-only`: it otherwise uses the latest complete full-suite run per model. A run is a model on an unchanged feature version, scoring code and clock: if project 1's code, prompt, cases, scorer or clock change between models, the matrix says so, and the gate exits 2.
 
-
-## Offline checks (no GPU, no Ollama)
+Offline checks (no GPU, no Ollama):
 
 ```
 PY=python
@@ -154,25 +181,29 @@ $PY -m harness.monitor --self-test    # alert logic on a seeded synthetic log wi
 
 The CI workflow (`.github/workflows/ci.yml`) calls the same `scripts/ci.sh` steps. No GitHub repo exists yet, so there is no CI badge and the workflow has not run on GitHub; its steps pass locally.
 
-## How it is built
+| Piece | Command | Output |
+|---|---|---|
+| Run | `python -m harness.run --suite support_agent --model fusion27b:iq3 [--limit N] [--resume]` | `runs.db` (SQLite): every case with model, git hash, prompt hash, latency, tokens, pass or fail, reasons |
+| Compare | `python -m harness.compare RUN_A RUN_B [--noise-floor] [--html FILE]` | per-category deltas, flipped cases, latency and token deltas, McNemar and bootstrap in plain words |
+| Gate | `python -m harness.gate --baseline RUN --candidate RUN --max-drop 4 --must-pass refuse [--rerun-lost K]` | exit 0 pass, 1 regression, 2 not comparable or unusable (never a crash as 1) |
+| Matrix | `python -m harness.matrix --suite support_agent --models fusion27b:iq3,fusion27b:q4ks,qwen3:14b` | `reports/matrix.md` and `reports/matrix.html` (inline SVG, no external assets) |
+| Monitor | `python -m harness.monitor` | `reports/monitor.md`: per-day metrics from project 1's `request_log`, drift alerts |
 
-- Adapters (`harness/adapters/`): `cases()`, `run_case(case, model)`, `score(case, output)`. The harness owns timing, tokens, retries, timeouts and storage.
-- `support_agent` calls project 1 in-process: its own `evals.run.run_case(case, "agent", run_turn, timeout_s)` and `evals.scoring.score_case`, so the harness measures what project 1 measures. The model is switched through `app.config.settings.ollama_model`, and the clock is frozen to the dataset's NOW through `settings.clock_now` (recorded in the run). The gated metric is project 1's exact scoring; its LLM judge is not used (it would change with the model under test). Project 1 files are never modified.
-- Infrastructure failures are not model answers. Project 1 turns every exception into its hand-off message, which can pass a refuse case; the adapter hooks that exception path and records a failed or timed-out request as an error (retried, counted as a failure, never a pass). This deliberately deviates from project 1's own score on that reply. An empty model answer stays a model failure.
-- A run is identified by the feature version, prompt, case file, scoring code (`scorer_hash`), frozen clock and variant. The gate exits 2 when two runs differ in the case file, scoring code or clock, or when either run does not cover the whole case file.
-- One suite per process: projects 1 and 4 both have top-level `app` and `evals` packages. `harness.run` loads one adapter, `harness.matrix` starts a subprocess per (suite, model), and a second repo in one process raises an error.
-- Statistics (`harness/stats.py`): exact McNemar test on paired flips, exact paired bootstrap interval for the accuracy difference (every resample enumerated, no seed), Wilson intervals for single accuracies.
-- Recorded fixtures (`fixtures/runs/`): real recorded runs of project 1 (`evals/results`), used by the CI gate. See `docs/runbook.md` for what they do and do not carry.
+Suites: `support_agent` (project 1), `ask_your_data` (project 4), `fake` (synthetic, for tests and CI; its reports carry a SYNTHETIC banner). One suite per process: projects 1 and 4 both have top-level `app` and `evals` packages, so `harness.run` loads one adapter and `harness.matrix` starts a subprocess per (suite, model).
 
-## Files
+## Repository layout
 
 | Path | What |
 |---|---|
 | `harness/` | the package (`run`, `compare`, `gate`, `matrix`, `monitor`, `runs`, `report`, `stats`, `storage`, adapters) |
-| `fixtures/runs/` | committed fixture runs for the CI gate |
+| `harness/adapters/` | `cases()`, `run_case(case, model)`, `score(case, output)` per suite; the harness owns timing, tokens, retries, timeouts and storage |
+| `harness/stats.py` | exact McNemar, exact paired bootstrap, Wilson intervals |
+| `fixtures/runs/` | committed fixture runs for the CI gate: real recorded runs of project 1 (`evals/results`); see `docs/runbook.md` for what they carry |
+| `reports/` | `matrix`, `noise-floor` and `monitor` reports |
 | `tests/` | unit tests; `tests/fixtures/p1/` is a frozen copy of project 1's scoring code and one full results file, for the parity test |
 | `scripts/ci.sh`, `scripts/make_fixtures.py` | CI steps; fixture builder (read-only on project 1) |
 | `docs/runbook.md`, `docs/engagement.md`, `docs/spec.md` | operating guide, engagement write-up, spec |
+| `docs/diagrams/`, `docs/media/` | architecture and trace diagrams (YAML and SVG); reel |
 
 ## Known limits
 
@@ -185,3 +216,6 @@ The CI workflow (`.github/workflows/ci.yml`) calls the same `scripts/ci.sh` step
 ## How this was built
 
 Built with Claude Code as a pair programmer. Scope, design decisions and verification are mine. Larkfield Coffee Co. is a fictional customer; all data is synthetic. MIT licensed (see `LICENSE`).
+
+<!-- signature -->
+<p align="center"><img src="docs/media/signature.gif" width="220" alt="An orange cat sticking its tongue out"><br><sub>Signature GIF: <a href="https://commons.wikimedia.org/wiki/File:Typical_orange_cat_behavior..gif">An orange cat sticking its tongue out</a> by Jim67e, CC BY-SA 4.0, via Wikimedia Commons.</sub></p>
